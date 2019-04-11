@@ -90,32 +90,68 @@ class App extends Component {
     return (
       <div className="App">
         <h2>{this.state.Title}</h2>
+        <div className="row">
+        <div className="col-md-6">
         <form ref="myForm" className="myForm">
           <input type="text" ref="title" placeholder="Enter title" className="formField" />
           <input type="text" ref="url" placeholder="Enter url" className="formField" />
           <input type="text" ref="text" placeholder="Enter text" className="formField" />
           <button onClick={(e)=>this.fSubmit(e)} className="myButton">Submit </button>
         </form>
+        </div>
+        <div className="col-md-6">
+
         <pre>
           {datas.map((data, i) =>
-            <li key={i} className="myList">
-              <div className="ui card" style={{width:'180vh'}}>
-                <div className="content">
-                  <div className="header">{data.title}</div>
+            <li key={i} style={{marginBottom:"50px" }}className="myList">
+              <div className="ui card" style={{width:'100%'}}>
+              <div className="content">
+                <div className="right floated meta">14h</div>
+                <img className="ui avatar image" src="https://pbs.twimg.com/profile_images/906789498192670720/baYXi9SA_400x400.jpg"/> 
+                <div className="header"><h2>{data.title}</h2></div>
                   <div className="description">
                     <p style={{whiteSpace:'normal'}}>{data.text}<br />Check out the site : <a href={data.url} target="_blank">{data.url}</a></p>
                   </div>
-                </div>
-                <div className="extra content">
-                  <i className="like icon"></i>
-                  121 Likes
+              </div>
+            <div className="image">
+              <img/>
+            </div>
+            <div class="content">
+                          <div className="ui left labeled button" tabindex="0">
+                <a href="#" className="ui basic right pointing label">
+                  2,048
+                </a>
+                <div className="ui button">
+                  <i className="heart icon"></i> Like
                 </div>
               </div>
-              <button onClick={()=>this.fRemove(i)} className="myListButton" style={{cursor:"pointer"}}>Remove </button>
-              <button onClick={()=>this.fEdit(i)} className="myListButton" style={{cursor:"pointer"}}>Edit </button>
+              <i class="comment icon"></i>
+              3 comments
+            </div>
+            <div class="extra content">
+              <div className="ui large transparent left icon input">
+                <i className="heart outline icon"></i>
+                <input type="text" placeholder="Add Comment..."/>
+              </div>
+            </div>
+            <div className="ui inverted segment">
+            <button onClick={()=>this.fRemove(i)} className="ui inverted primary basic button" style={{cursor:"pointer"}}>Remove </button>
+            <button onClick={()=>this.fEdit(i)} className="ui inverted primary basic button" style={{cursor:"pointer"}}>Edit </button>
+            </div>
+            </div>
+
             </li>
+          
+
+
+
           )}
         </pre>
+        </div>
+        
+        </div>
+        
+        
       </div>
     );
   }
