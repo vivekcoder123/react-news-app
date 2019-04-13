@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
 
+
 class App extends Component {
 
   constructor(props){
     super(props);
+    var today = new Date(),
+        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
     this.state={
       Title: '𝕷𝖊𝖆𝖗𝖓𝕮𝖔𝖔𝖑 𝕹𝖊𝖜𝖘',
       act: 0,
       index: '',
       datas: [],
+      date:date,
       
       
     }
@@ -262,7 +267,7 @@ class App extends Component {
               <div className="ui card" style={{width:'100%'}}>
               
               <div className="content">
-                <div className="right floated meta">14h</div>
+                <div className="right floated meta">{this.state.date}</div>
                 <img className="ui avatar image" src="https://pbs.twimg.com/profile_images/906789498192670720/baYXi9SA_400x400.jpg" alt="" /> 
                 <div className="header"><h2>{data.title}</h2></div>
                   <div className="description">
