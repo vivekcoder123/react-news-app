@@ -211,7 +211,33 @@ class App extends Component {
     return (
       <div className="App">
         <h2 style={{textAlign:"center",fontSize:"100px"}}>{this.state.Title}</h2>
-        <div className="row">
+        <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">LearnCool News</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">News</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Blog</a>
+                </li>
+              </ul>
+              <span class="navbar-text">
+                Login/Signup
+              </span>
+            </div>
+          </nav>
+        </header>
+        
+        <div className="row" style={{marginTop:"50px"}}>
+        
         <div className="col-md-6">
         <h2>ℙ𝕠𝕤𝕥 𝕐𝕠𝕦𝕣 ℕ𝕖𝕨𝕤 ℍ𝕖𝕣𝕖...</h2>
         <form ref="myForm" className="myForm">
@@ -225,12 +251,16 @@ class App extends Component {
           <button onClick={(e)=>this.fSubmit(e)} className="myButton">Submit </button>
         </form>
         </div>
+        
+        
         <div className="col-md-6">
         <pre>
+          
           <h2>🅝🅔🅦🅢 🅕🅔🅔🅓</h2>
           {datas.map((data, i) =>
             <li key={i} style={{marginBottom:"50px" }}className="myList">
               <div className="ui card" style={{width:'100%'}}>
+              
               <div className="content">
                 <div className="right floated meta">14h</div>
                 <img className="ui avatar image" src="https://pbs.twimg.com/profile_images/906789498192670720/baYXi9SA_400x400.jpg" alt="" /> 
@@ -263,6 +293,7 @@ class App extends Component {
           )}
         </pre>
         </div>
+        
         
         </div>
         
