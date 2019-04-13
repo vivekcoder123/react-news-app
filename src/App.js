@@ -9,7 +9,9 @@ class App extends Component {
       Title: 'React News Application',
       act: 0,
       index: '',
-      datas: []
+      datas: [],
+      
+      
     }
   } 
 
@@ -36,12 +38,14 @@ class App extends Component {
       alert("text required");
       return;
     }
-
+    let likes=0;
     if(this.state.act === 0){   //new
       let data = {
         title, 
         url,
-        text
+        text,
+        likes
+        
       }
       datas.push(data);
     }else{                      //update
@@ -59,6 +63,11 @@ class App extends Component {
     this.refs.myForm.reset();
     this.refs.title.focus();
   }
+  upvote=(i)=>{
+    let data = this.state.datas[i];
+    data.likes=data.likes+1;
+    document.querySelector("#likes").innerHTML=data.likes; 
+  }
 
   fRemove = (i) => {
     let datas = this.state.datas;
@@ -73,7 +82,7 @@ class App extends Component {
 
   fEdit = (i) => {
     let data = this.state.datas[i];
-    this.refs.title.value = data.title;
+    this.refs.title.vta.titlealue = data.title;
     this.refs.url.value = data.url;
     this.refs.text.value = data.text;
 
@@ -116,19 +125,19 @@ class App extends Component {
             <div className="image">
               <img/>
             </div>
-            <div class="content">
+            <div className="content">
                           <div className="ui left labeled button" tabindex="0">
-                <a href="#" className="ui basic right pointing label">
-                  2,048
+                <a href="#" id="likes" className="ui basic right pointing label">
+                  {data.likes}
                 </a>
-                <div className="ui button">
-                  <i className="heart icon"></i> Like
+                <div className="ui button" ><i onClick={()=>this.upvote(i)} className="heart icon" ></i> Like
+                  
                 </div>
               </div>
-              <i class="comment icon"></i>
+              <i className="comment icon"></i>
               3 comments
             </div>
-            <div class="extra content">
+            <div className="extra content">
               <div className="ui large transparent left icon input">
                 <i className="heart outline icon"></i>
                 <input type="text" placeholder="Add Comment..."/>
