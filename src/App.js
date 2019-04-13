@@ -24,26 +24,72 @@ class App extends Component {
 
     let datas = this.state.datas;
     let title = this.refs.title.value;
-    if(title===null || title===""){
-      alert("title required");
-      return;
-    }
     let url = this.refs.url.value;
+    let description=this.refs.description.value;
+
+    if(title===null || title===""){
+        document.querySelector("#title").style.display="block";
+
+        if(url===null || url===""){
+          document.querySelector("#url").style.display="block";
+        }else{
+          document.querySelector("#url").style.display="none";
+        }
+
+        if(description===null || description===""){
+        document.querySelector("#description").style.display="block";
+        }else{
+          document.querySelector("#description").style.display="none";
+        }
+
+        return;
+
+      }else{
+        document.querySelector("#title").style.display="none";
+      }
+   
     if(url===null || url===""){
-      alert("url required");
+
+      document.querySelector("#url").style.display="block";
+
+      if(description===null || description===""){
+        document.querySelector("#description").style.display="block";
+        }else{
+          document.querySelector("#description").style.display="none";
+        }
+
       return;
+    }else{
+      document.querySelector("#url").style.display="none";
+      var res = url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    
+      if(res == null){
+        document.querySelector("#ivurl").style.display="block";
+        if(description===null || description===""){
+          document.querySelector("#description").style.display="block";
+        }else{
+          document.querySelector("#description").style.display="none";
+        }
+        return;
+      }else{
+        document.querySelector("#ivurl").style.display="none";
+      }
+    
     }
-    let text=this.refs.text.value;
-    if(text===null || text===""){
-      alert("text required");
+    
+    if(description===null || description===""){
+      document.querySelector("#description").style.display="block";
       return;
+    }else{
+      document.querySelector("#description").style.display="none";
     }
+
     let likes=0;
     if(this.state.act === 0){   //new
       let data = {
         title, 
         url,
-        text,
+        description,
         likes
         
       }
@@ -52,7 +98,7 @@ class App extends Component {
       let index = this.state.index;
       datas[index].title = title;
       datas[index].url = url;
-      datas[index].text = text;
+      datas[index].description = description;
     }    
 
     this.setState({
@@ -66,7 +112,12 @@ class App extends Component {
   upvote=(i)=>{
     let data = this.state.datas[i];
     data.likes=data.likes+1;
-    document.querySelector("#likes").innerHTML=data.likes; 
+    var like="#likes"+i;
+    document.querySelector(like).innerHTML=data.likes; 
+    this.setState({
+      act: 1,
+      index: i
+    });
   }
 
   fRemove = (i) => {
@@ -81,10 +132,71 @@ class App extends Component {
   }
 
   fEdit = (i) => {
+    document.querySelector("#title").style.display="none";
+    document.querySelector("#url").style.display="none";
+    document.querySelector("#description").style.display="none";
+    document.querySelector("#ivurl").style.display="none";
     let data = this.state.datas[i];
-    this.refs.title.vta.titlealue = data.title;
+    if(data.title===null || data.title===""){
+        document.querySelector("#title").style.display="block";
+
+        if(data.url===null || data.url===""){
+          document.querySelector("#url").style.display="block";
+        }else{
+          document.querySelector("#url").style.display="none";
+        }
+
+        if(data.description===null || data.description===""){
+        document.querySelector("#description").style.display="block";
+        }else{
+          document.querySelector("#description").style.display="none";
+        }
+
+        return;
+
+      }else{
+        document.querySelector("#title").style.display="none";
+      }
+   
+    if(data.url===null || data.url===""){
+
+      document.querySelector("#url").style.display="block";
+
+      if(data.description===null || data.description===""){
+        document.querySelector("#description").style.display="block";
+        }else{
+          document.querySelector("#description").style.display="none";
+        }
+
+      return;
+    }else{
+      document.querySelector("#url").style.display="none";
+      var res = data.url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+    
+      if(res == null){
+        document.querySelector("#ivurl").style.display="block";
+        if(data.description===null || data.description===""){
+          document.querySelector("#description").style.display="block";
+        }else{
+          document.querySelector("#description").style.display="none";
+        }
+        return;
+      }else{
+        document.querySelector("#ivurl").style.display="none";
+      }
+    
+    }
+    
+    if(data.description===null || data.description===""){
+      document.querySelector("#description").style.display="block";
+      return;
+    }else{
+      document.querySelector("#description").style.display="none";
+    }
+
+    this.refs.title.value = data.title;
     this.refs.url.value = data.url;
-    this.refs.text.value = data.text;
+    this.refs.description.value = data.description;
 
     this.setState({
       act: 1,
@@ -102,45 +214,37 @@ class App extends Component {
         <div className="row">
         <div className="col-md-6">
         <form ref="myForm" className="myForm">
-          <input type="text" ref="title" placeholder="Enter title" className="formField" />
-          <input type="text" ref="url" placeholder="Enter url" className="formField" />
-          <input type="text" ref="text" placeholder="Enter text" className="formField" />
+          <input type="text" ref="title" placeholder="Enter Title" className="formField" />
+          <p className="alert alert-danger" id="title" style={{display:"none"}}>* Please Enter The Title</p>
+          <input type="text" ref="url" placeholder="Enter Url" className="formField" />
+          <p className="alert alert-danger" id="url" style={{display:"none"}}>* Please Enter The Url</p>
+          <p className="alert alert-danger" id="ivurl" style={{display:"none"}}>* Provided Url Is Invalid</p>
+          <input type="text" ref="description" placeholder="Enter Description" className="formField" />
+          <p className="alert alert-danger" id="description" style={{display:"none"}}>* Please Enter The Description</p>
           <button onClick={(e)=>this.fSubmit(e)} className="myButton">Submit </button>
         </form>
         </div>
         <div className="col-md-6">
-
         <pre>
           {datas.map((data, i) =>
             <li key={i} style={{marginBottom:"50px" }}className="myList">
               <div className="ui card" style={{width:'100%'}}>
               <div className="content">
                 <div className="right floated meta">14h</div>
-                <img className="ui avatar image" src="https://pbs.twimg.com/profile_images/906789498192670720/baYXi9SA_400x400.jpg"/> 
+                <img className="ui avatar image" src="https://pbs.twimg.com/profile_images/906789498192670720/baYXi9SA_400x400.jpg" alt="" /> 
                 <div className="header"><h2>{data.title}</h2></div>
                   <div className="description">
-                    <p style={{whiteSpace:'normal'}}>{data.text}<br />Check out the site : <a href={data.url} target="_blank">{data.url}</a></p>
+                    <p style={{whiteSpace:'normal'}}>{data.description}<br />Check out the site : <a href={data.url} target="_blank" rel="noopener noreferrer">{data.url}</a></p>
                   </div>
               </div>
-            <div className="image">
-              <img/>
-            </div>
             <div className="content">
-                          <div className="ui left labeled button" tabindex="0">
-                <a href="#" id="likes" className="ui basic right pointing label">
+                          <div className="ui left labeled button">
+                <button id={"likes"+i} className="ui basic right pointing label">
                   {data.likes}
-                </a>
-                <div className="ui button" ><i onClick={()=>this.upvote(i)} className="heart icon" ></i> Like
+                </button>
+                <div className="ui button" onClick={()=>this.upvote(i)}><i className="heart icon" ></i> Upvote
                   
                 </div>
-              </div>
-              <i className="comment icon"></i>
-              3 comments
-            </div>
-            <div className="extra content">
-              <div className="ui large transparent left icon input">
-                <i className="heart outline icon"></i>
-                <input type="text" placeholder="Add Comment..."/>
               </div>
             </div>
             <div className="ui inverted segment">
