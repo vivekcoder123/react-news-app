@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import TimeAgo from 'timeago-react';
 
 class App extends Component {
 
   constructor(props){
     super(props);
-    var today = new Date(),
-        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-
+    var date = new Date();
     this.state={
       Title: '𝕷𝖊𝖆𝖗𝖓𝕮𝖔𝖔𝖑 𝕹𝖊𝖜𝖘',
       act: 0,
       index: '',
-      datas: [],
-      date:date,
-      
-      
+      datas: [{title:'News App',url:'https://newsapp.com',description:'this is my first news app in react js',likes:0,color:'white'}],
+      date
     }
   } 
 
@@ -66,7 +62,7 @@ class App extends Component {
       return;
     }else{
       document.querySelector("#url").style.display="none";
-      var res = url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+      var res = url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%.\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%\+.~#?&//=]*)/g);
     
       if(res == null){
         document.querySelector("#ivurl").style.display="block";
@@ -90,16 +86,17 @@ class App extends Component {
     }
 
     let likes=0;
-    if(this.state.act === 0){   //new
+    let color='white';
+    if(this.state.act === 0){
       let data = {
         title, 
         url,
         description,
-        likes
-        
+        likes,
+        color   
       }
       datas.push(data);
-    }else{                      //update
+    }else{
       let index = this.state.index;
       datas[index].title = title;
       datas[index].url = url;
@@ -116,7 +113,15 @@ class App extends Component {
   }
   upvote=(i)=>{
     let data = this.state.datas[i];
-    data.likes=data.likes+1;
+    var color="#colors"+i;
+    if(data.likes>0){
+      data.likes=data.likes-1;
+      document.querySelector(color).style.color="white";
+    }else{
+      data.likes=data.likes+1;
+      document.querySelector(color).style.color="red";
+    }
+
     var like="#likes"+i;
     document.querySelector(like).innerHTML=data.likes; 
     this.setState({
@@ -176,7 +181,7 @@ class App extends Component {
       return;
     }else{
       document.querySelector("#url").style.display="none";
-      var res = data.url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
+      var res = data.url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%.\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%\+.~#?&//=]*)/g);
     
       if(res == null){
         document.querySelector("#ivurl").style.display="block";
@@ -214,37 +219,15 @@ class App extends Component {
   render() {
     let datas = this.state.datas;
     return (
-      <div className="App">
-        <h2 style={{textAlign:"center",fontSize:"100px"}}>{this.state.Title}</h2>
-        <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">LearnCool News</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarText">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">News</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Blog</a>
-                </li>
-              </ul>
-              <span class="navbar-text">
-                Login/Signup
-              </span>
-            </div>
-          </nav>
-        </header>
+      <div id="particles-js">
         
+      <div className="App">
+     
+        <h2 style={{textAlign:"center",fontSize:"100px"}}>{this.state.Title}</h2>
         <div className="row" style={{marginTop:"50px"}}>
         
         <div className="col-md-6">
-        <h2>ℙ𝕠𝕤𝕥 𝕐𝕠𝕦𝕣 ℕ𝕖𝕨𝕤 ℍ𝕖𝕣𝕖...</h2>
+        <h2 className="text-center">ℙ𝕠𝕤𝕥 𝕐𝕠𝕦𝕣 ℕ𝕖𝕨𝕤 ℍ𝕖𝕣𝕖....</h2>
         <form ref="myForm" className="myForm">
           <input type="text" ref="title" placeholder="Enter Title" className="formField" />
           <p className="alert alert-danger" id="title" style={{display:"none"}}>* Please Enter The Title</p>
@@ -267,7 +250,9 @@ class App extends Component {
               <div className="ui card" style={{width:'100%'}}>
               
               <div className="content">
-                <div className="right floated meta">{this.state.date}</div>
+                <div className="right floated meta">
+                <TimeAgo datetime={this.state.date} />
+                </div>
                 <img className="ui avatar image" src="https://pbs.twimg.com/profile_images/906789498192670720/baYXi9SA_400x400.jpg" alt="" /> 
                 <div className="header"><h2>{data.title}</h2></div>
                   <div className="description">
@@ -279,7 +264,7 @@ class App extends Component {
                 <button id={"likes"+i} className="ui basic right pointing label">
                   {data.likes}
                 </button>
-                <div className="ui button" onClick={()=>this.upvote(i)}><i className="heart icon" ></i> Upvote
+                <div className="ui button" onClick={()=>this.upvote(i)}><i className="heart icon" id={"colors"+i}></i> Upvote
                   
                 </div>
               </div>
@@ -300,6 +285,7 @@ class App extends Component {
         </div>
         
         
+        </div>
         </div>
         
         
