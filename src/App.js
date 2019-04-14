@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
     var date = new Date();
     this.state={
-      Title: '𝕷𝖊𝖆𝖗𝖓𝕮𝖔𝖔𝖑 𝕹𝖊𝖜𝖘',
+      Title: 'LearnCool News',
       act: 0,
       index: '',
       datas: [{title:'News App',url:'https://newsapp.com',description:'this is my first news app in react js',likes:0,color:'white'}],
@@ -223,11 +223,11 @@ class App extends Component {
         
       <div className="App">
      
-        <h2 style={{textAlign:"center",fontSize:"100px"}}>{this.state.Title}</h2>
+        <h2 style={{textAlign:"center",fontFamily:"Devonshire",fontSize:"100px"}}>{this.state.Title}</h2>
         <div className="row" style={{marginTop:"50px"}}>
         
         <div className="col-md-6">
-        <h2 className="text-center">ℙ𝕠𝕤𝕥 𝕐𝕠𝕦𝕣 ℕ𝕖𝕨𝕤 ℍ𝕖𝕣𝕖....</h2>
+        <h2 className="text-center" style={{fontFamily:"Cabin Sketch"}}>Post Your News Here...</h2>
         <form ref="myForm" className="myForm">
           <input type="text" ref="title" placeholder="Enter Title" className="formField" />
           <p className="alert alert-danger" id="title" style={{display:"none"}}>* Please Enter The Title</p>
@@ -244,7 +244,7 @@ class App extends Component {
         <div className="col-md-6">
         <pre>
           
-          <h2>🅝🅔🅦🅢 🅕🅔🅔🅓</h2>
+          <h2 style={{fontFamily:"Damion"}}>News Feed</h2>
           {datas.map((data, i) =>
             <li key={i} style={{marginBottom:"50px" }}className="myList">
               <div className="ui card" style={{width:'100%'}}>
