@@ -223,7 +223,7 @@ class App extends Component {
         
       <div className="App">
      
-        <h2 style={{textAlign:"center",fontFamily:"Devonshire",fontSize:"100px"}}>{this.state.Title}</h2>
+        <h2 style={{textAlign:"center",fontFamily:"Devonshire",fontSize:"70px"}}>{this.state.Title}</h2>
         <div className="row" style={{marginTop:"50px"}}>
         
         <div className="col-md-6">
