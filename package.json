@@ -1,32 +1,29 @@
 {
-  "name": "app6",
+  "name": "react-graphql-crud",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "8.10.0",
-    "npm": "6.7.0"
-  },
   "dependencies": {
-    "bootstrap": "^4.3.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
-    "timeago-react": "^2.0.1"
+    "apollo-client-preset": "^1.0.8",
+    "apollo-link": "^1.1.0",
+    "apollo-link-ws": "^1.0.5",
+    "bootstrap": "^4.0.0",
+    "graphql": "^0.13.0",
+    "graphql-tag": "^2.7.3",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.12.9",
+    "react": "^16.2.0",
+    "react-apollo": "^2.0.4",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.1",
+    "subscriptions-transport-ws": "^0.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "devDependencies": {
+    "webpack": "^2.1.0-beta.8"
+  }
 }
