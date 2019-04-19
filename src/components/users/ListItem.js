@@ -7,7 +7,12 @@ import 'bootstrap';
 
 class ListItem extends Component {
 
+  state={
+  loading:false
+  };
+
   handleDeleteUser = (e) => {
+    this.setState({loading:true});
     $(".testing").modal("hide");
     const { deleteUser, user, alert } = this.props;
     deleteUser({
@@ -18,8 +23,9 @@ class ListItem extends Component {
     })
     .then((res) => {
       alert({
-        success: 'The user was deleted!'
+        success: 'Feed has been deleted successfully!'
       });
+      this.setState({loading:false});
     }).catch((error) => {
       alert({
         danger: error.message
@@ -28,6 +34,7 @@ class ListItem extends Component {
   }
 
   handlelikeUser = (e) => {
+    this.setState({loading:true});
     const { likeUser, user, alert } = this.props;
     likeUser({
       variables: {
@@ -46,8 +53,9 @@ class ListItem extends Component {
     })
     .then((res) => {
       alert({
-        success: 'Your Post  ❤️️ Liked!'
+        success: 'Feed has been liked successfully!'
       });
+      this.setState({loading:false});
     }).catch((error) => {
       alert({
         danger: error.message
@@ -58,26 +66,15 @@ class ListItem extends Component {
   handleEditUser = () => {
     this.props.editUser(this.props.user);
   }
-  mymodal = () =>{
-    <div class="modal-content">
-			<div class="modal-header">
-				<div class="icon-box">
-					<i class="material-icons"></i>
-				</div>				
-				<h4 class="modal-title">Are you sure?</h4>	
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			</div>
-			<div class="modal-body">
-				<p>Do you really want to delete these records? This process cannot be undone.</p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-danger">Delete</button>
-			</div>
-		</div>
-  }
-
+  
   render() {
+    if(this.state.loading){
+      return (<div class="ui">
+      <div class="ui active inverted dimmer">
+        <div class="ui text loader">Please wait.....</div>
+      </div>
+      </div>);
+    }else{
     const user = this.props.user;
     return (
       <div class="ui card" style={{width:"100%"}}>
@@ -86,7 +83,7 @@ class ListItem extends Component {
     <i title="Delete Post" style={{cursor:"pointer",fontSize:"24px",color:"#f65d3c"}} 
     class="right floated trash icon" 
     data-toggle="modal" data-target={`#myModal${user.id}`}></i>
-    <img class="ui avatar image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg"/  > <strong>{user.title}</strong>
+    <img class="ui avatar image" src="https://semantic-ui.com/images/avatar/large/elliot.jpg"/><strong>{user.title}</strong>
     
     <div class="description">
       <p>{user.description}</p>
@@ -94,22 +91,28 @@ class ListItem extends Component {
     </div>
   </div>
   <div class="extra content">
-    <span class="left floated like">
+    <span class="left floated like" onClick={this.handlelikeUser} style={{cursor:"pointer"}}>
       {user.likes>0?user.likes:0}
-      <i class="like icon" style={{marginLeft:"4px"}} onClick={this.handlelikeUser}></i>
+      <i class="like icon" style={{marginLeft:"4px"}}></i>
       Upvote
     </span>
   </div>
   <div id={`myModal${user.id}`} class="modal fade testing" role="dialog">
   <div class="modal-dialog">
 
-    <div class="modal-content">
-      <div class="modal-body">
-        <p>Are you sure, you want to delete this feed !</p>
+    <div class="modal-content" style={{padding:"20px"}}>
+      <div className="modal-body text-center">
+        <h3>Are you sure, you want to delete this feed !</h3>
       </div>
-      <div>
-        <button className="btn btn-light" data-dismiss="modal">No</button>
-        <button className="btn btn-danger" onClick={this.handleDeleteUser}>Yes</button>
+      <div className="text-center">
+        <div className="row">
+        <div className="col-6">
+        <button className="btn btn-warning btn-block" data-dismiss="modal">No</button>
+        </div>
+        <div className="col-6">
+        <button className="btn btn-danger btn-block" onClick={this.handleDeleteUser}>Yes</button>
+        </div>
+        </div>
       </div>
     </div>
 
@@ -119,6 +122,7 @@ class ListItem extends Component {
 
 </div>
     );
+    }
   }
 }
 

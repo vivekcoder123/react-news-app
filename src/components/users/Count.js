@@ -13,7 +13,7 @@ class Count extends Component {
     }
     return (
       <span className="badge badge-secondary">
-        Users Count: { allPosts.length }
+        Feeds count: { allPosts.length }
       </span>
     );
   }

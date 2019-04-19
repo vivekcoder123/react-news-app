@@ -55,7 +55,7 @@ class App extends Component {
        
         <Alert alert={this.state.alert} />
         <div className="d-flex justify-content-between align-items-center" style={{padding:"0% 10%"}}>
-        <button class="ui basic button" onClick={this.addUser} style={{margin:"20px"}}><i class="icon user" ></i>Add Post</button>
+        <button class="ui basic button black active" onClick={this.addUser} style={{margin:"20px"}}><i class="icon user" ></i>Add Post</button>
 
           <UsersCount />
         </div>

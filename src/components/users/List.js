@@ -15,7 +15,6 @@ class List extends Component {
   }
 
   render() {
-
     const {loading, error, allPosts} = this.props.data;
     if (loading) {
       return (<div class="ui">
@@ -33,7 +32,7 @@ class List extends Component {
             key={user.id}
             user={user}
             editUser={this.props.editUser}
-            alert={this.props.alert} />) }
+            alert={this.props.alert}/>) }
 
       </div>
     );

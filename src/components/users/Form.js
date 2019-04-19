@@ -75,10 +75,12 @@ class UserForm extends Component {
                     <input
                       type="url"
                       value={this.state.url}
-                      placeholder="Url"
+                      placeholder="Enter absolute url"
                       className="form-control"
                       onChange={(e)=>this.setState({url:e.target.value})}
-                      required />
+                      required
+                      title="Url should start with http:// or https://"
+                     />
                   </div>
                   <div className="form-group">
                     <input

@@ -2,14 +2,18 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { updateUserQuery } from '../../queries/users';
 import Form from './Form';
+import $ from 'jquery';
 
 class Edit extends Component {
 
   state = {
-    alert: ''
+    alert: '',
+    loading:false
   }
 
+
   handleSubmit = (values) => {
+    this.setState({loading:true});
     const { title, description, url } = values;
     const { user, mutate, alert, close } = this.props;
     mutate({
@@ -22,9 +26,12 @@ class Edit extends Component {
     })
     .then((res) => {
       alert({
-        success: ' Feed was updated!'
+        success: 'Feed has been updated successfully!'
       });
       close();
+      $('body').removeClass('modal-open');
+      $('.modal-backdrop').remove();
+      this.setState({loading:false});  
     }).catch((error) => {
       this.setState({
         alert: {
@@ -36,7 +43,14 @@ class Edit extends Component {
   };
 
   render() {
-
+    if(this.state.loading){
+      return (<div class="ui">
+      <div class="ui active inverted dimmer">
+        <div class="ui text loader">Editing In Progress.....</div>
+      </div>
+      </div>);
+    }
+    else{
     return (
       <Form
         modalId="editUserModal"
@@ -46,6 +60,7 @@ class Edit extends Component {
         close={this.props.close}
         alert={this.state.alert} />
     );
+    }
   }
 }
 

@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { allUsersQuery, createUserQuery } from '../../queries/users';
 import Form from './Form';
+import $ from 'jquery';
 
 class Add extends Component {
 
   state = {
-    alert: ''
+    alert: '',
+    loading:false
   }
 
   handleSubmit = (values) => {
+    this.setState({loading:true});
     const { title, description, url } = values;
     const likes=0;
     const { mutate, alert, close } = this.props;
@@ -19,9 +22,12 @@ class Add extends Component {
     })
     .then((res) => {
       alert({
-        success: 'The user was created!'
+        success: 'New Feed has been created successfully!'
       });
       close();
+      $('body').removeClass('modal-open');
+      $('.modal-backdrop').remove();
+      this.setState({loading:false});  
     }).catch((error) => {
       this.setState({
         alert: {
@@ -34,6 +40,13 @@ class Add extends Component {
 
   render() {
 
+    if(this.state.loading){
+      return (<div class="ui">
+      <div class="ui active inverted dimmer">
+        <div class="ui text loader">Creating News Feed.....</div>
+      </div>
+      </div>);
+    }else{
     return (
       <Form
         modalId="addUserModal"
@@ -43,6 +56,7 @@ class Add extends Component {
         close={this.props.close}
         alert={this.state.alert} />
     );
+    }
   }
 }
 
