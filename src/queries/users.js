@@ -6,27 +6,30 @@ export const allUsersQuery = gql`
       id
       title
       description
+      url
       likes
     }
   }
 `;
 
 export const createUserQuery = gql`
-  mutation createPost($title: String!, $description: String!) {
-    createPost(title: $title, description: $description) {
+  mutation createPost($title: String!, $description: String!, $url: String!) {
+    createPost(title: $title, description: $description,url: $url) {
       id
       title
       description
+      url
     }
   }
 `;
 
 export const updateUserQuery = gql`
-  mutation updatePost($id: ID!, $title: String!, $description: String!) {
-    updatePost(id: $id, title: $title, description: $description) {
+  mutation updatePost($id: ID!, $title: String!, $description: String!, $url: String!) {
+    updatePost(id: $id, title: $title, description: $description,url: $url) {
       id
       title
       description
+      url
     }
   }
 `;

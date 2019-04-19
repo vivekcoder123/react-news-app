@@ -10,13 +10,14 @@ class Edit extends Component {
   }
 
   handleSubmit = (values) => {
-    const { name, email } = values;
+    const { title, description, url } = values;
     const { user, mutate, alert, close } = this.props;
     mutate({
       variables: {
         id: user.id,
-        name,
-        email
+        title,
+        description,
+        url
       }
     })
     .then((res) => {

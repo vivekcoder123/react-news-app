@@ -17,7 +17,8 @@ class App extends Component {
     this.setState({
       addUser: {
         title: '',
-        description: ''
+        description: '',
+        url:''
       }
     });
   }
@@ -48,7 +49,7 @@ class App extends Component {
     return (
       <div className="container">
         <header className="App-header">
-          <h1 className="App-title">React GraphQL CRUD</h1>
+          <h1 className="App-title">News Feed Webapp</h1>
         </header>
         <Alert alert={this.state.alert} />
         <div className="d-flex justify-content-between align-items-center">

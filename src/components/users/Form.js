@@ -7,13 +7,14 @@ class UserForm extends Component {
 
   state = {
     title: '',
-    description: ''
+    description: '',
+    url: ''
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.user && !this.props.user) {
-      const { title, description } = nextProps.user;
-      this.setState({ title, description });
+      const { title, description, url } = nextProps.user;
+      this.setState({ title, description, url });
     }
   }
 
@@ -26,9 +27,9 @@ class UserForm extends Component {
   }
 
   handleSubmit = (e) => {
-    const { title, description } = this.state;
+    const { title, description, url } = this.state;
     e.preventDefault();
-    this.props.handleSubmit({ title, description });
+    this.props.handleSubmit({ title, description, url });
   }
 
   render() {
@@ -59,11 +60,18 @@ class UserForm extends Component {
                   <div className="col">
                     <input
                       type="text"
-                      name="description"
                       value={this.state.description}
                       placeholder="Email"
                       className="form-control"
-                      onchange={this.handleDescriptionChange} />
+                      onChange={(e)=>this.setState({description:e.target.value})} />
+                  </div>
+                  <div className="col">
+                    <input
+                      type="text"
+                      value={this.state.url}
+                      placeholder="Url"
+                      className="form-control"
+                      onChange={(e)=>this.setState({url:e.target.value})} />
                   </div>
                 </div>
               </div>

@@ -11,11 +11,11 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 const httpLink = new HttpLink({
-  uri: ''
+  uri: 'https://api.graph.cool/simple/v1/cjulgy3o85pl80183hk2vcm9u'
 });
 
 const wsLink = new WebSocketLink({
-  uri: '',
+  uri: 'wss://subscriptions.graph.cool/v1/cjulgy3o85pl80183hk2vcm9u',
   options: {
     reconnect: true
   }

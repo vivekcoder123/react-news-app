@@ -29,8 +29,9 @@ class List extends Component {
           <tr>
             <th>Edit</th>
             <th>Exclude</th>
-            <th>Name</th>
-            <th>Email</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Url</th>
             <th>Likes</th>
             <th>Like</th>
           </tr>

@@ -10,10 +10,11 @@ class Add extends Component {
   }
 
   handleSubmit = (values) => {
-    const { title, description } = values;
+    const { title, description, url } = values;
+    const likes=0;
     const { mutate, alert, close } = this.props;
     mutate({
-      variables: {title, description },
+      variables: {title, description, url, likes },
       refetchQueries: [ { query: allUsersQuery }]
     })
     .then((res) => {
