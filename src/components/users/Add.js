@@ -37,7 +37,7 @@ class Add extends Component {
     return (
       <Form
         modalId="addUserModal"
-        title="Add User"
+        title="Create New Feed"
         handleSubmit={this.handleSubmit}
         user={this.props.user}
         close={this.props.close}

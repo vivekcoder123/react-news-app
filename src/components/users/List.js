@@ -18,30 +18,24 @@ class List extends Component {
 
     const {loading, error, allPosts} = this.props.data;
     if (loading) {
-      return <div>Loading...</div>;
+      return (<div class="ui">
+      <div class="ui active inverted dimmer">
+        <div class="ui text loader">Fetching Feeds</div>
+      </div>
+      </div>);
     }
     if (error) {
       return <div>${error}</div>;
     }
     return (
-      <table className="table">
-        <tbody>
-          <tr>
-            <th>Edit</th>
-            <th>Exclude</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Url</th>
-            <th>Likes</th>
-            <th>Like</th>
-          </tr>
+      <div style={{padding:"0% 10%"}}>
           { allPosts.map(user => <ListItem
             key={user.id}
             user={user}
             editUser={this.props.editUser}
             alert={this.props.alert} />) }
-        </tbody>
-      </table>
+
+      </div>
     );
   }
 }

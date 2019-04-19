@@ -48,45 +48,50 @@ class UserForm extends Component {
               </div>
               <div className="modal-body">
                 <Alert alert={alert} />
-                <div className="form-row">
-                  <div className="col">
+                <div className="row">
+                <div className="col-6">
+                <img src="index.jpeg" className="img-fluid" style={{position:"relative",bottom:"24px"}}/>
+                </div>
+                <div className="col-6">
+                <div className="form-group">
                     <input
                       type="text"
                       value={this.state.title}
-                      placeholder="Name"
+                      placeholder="Title"
                       onChange={(e)=>this.setState({title:e.target.value})}
-                      className="form-control" />
-                  </div>
-                  <div className="col">
-                    <input
-                      type="text"
-                      value={this.state.description}
-                      placeholder="Email"
                       className="form-control"
-                      onChange={(e)=>this.setState({description:e.target.value})} />
+                      required />
                   </div>
-                  <div className="col">
+                  <div className="form-group">
+                    <textarea
+                      value={this.state.description}
+                      placeholder="Description"
+                      className="form-control"
+                      onChange={(e)=>this.setState({description:e.target.value})}
+                      required rows="2" cols="10">
+                      </textarea>
+                  </div>
+                  <div className="form-group">
                     <input
-                      type="text"
+                      type="url"
                       value={this.state.url}
                       placeholder="Url"
                       className="form-control"
-                      onChange={(e)=>this.setState({url:e.target.value})} />
+                      onChange={(e)=>this.setState({url:e.target.value})}
+                      required />
                   </div>
+                  <div className="form-group">
+                    <input
+                      type="submit"
+                      className="btn btn-dark"
+                      value={head} />
+                  </div>
+                  
+                </div>
+                  
                 </div>
               </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                  onClick={close}>Close</button>
-                <input
-                  type="submit"
-                  name="Save changes"
-                  placeholder="New user"
-                  className="btn btn-primary" />
-              </div>
+              
             </form>
           </div>
         </div>

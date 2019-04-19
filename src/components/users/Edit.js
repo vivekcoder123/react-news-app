@@ -22,7 +22,7 @@ class Edit extends Component {
     })
     .then((res) => {
       alert({
-        success: 'The user was updated!'
+        success: ' Feed was updated!'
       });
       close();
     }).catch((error) => {
@@ -40,7 +40,7 @@ class Edit extends Component {
     return (
       <Form
         modalId="editUserModal"
-        title="Edit User"
+        title="Edit Feed"
         handleSubmit={this.handleSubmit}
         user={this.props.user}
         close={this.props.close}

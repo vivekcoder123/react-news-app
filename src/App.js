@@ -47,16 +47,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <header className="App-header">
-          <h1 className="App-title">News Feed Webapp</h1>
-        </header>
+      <div className="container" style={{marginTop:"24px"}}>
+          <h1 class="ui center aligned icon header">
+            <i class="circular newspaper icon"></i>
+            LearnCool News
+          </h1>
+       
         <Alert alert={this.state.alert} />
-        <div className="d-flex justify-content-between align-items-center">
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={this.addUser}>Add User</button>
+        <div className="d-flex justify-content-between align-items-center" style={{padding:"0% 10%"}}>
+        <button class="ui basic button" onClick={this.addUser} style={{margin:"20px"}}><i class="icon user" ></i>Add Post</button>
+
           <UsersCount />
         </div>
         <UsersList
